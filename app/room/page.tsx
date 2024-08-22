@@ -15,12 +15,19 @@ import { useEffect, useState } from "react";
 
 export default function Page() {
   // TODO: get user input for room and name
-  const [room, setRoom] = useState('test-room');
-  const [name, setName] = useState('test-name');
+ // const [room, setRoom] = useState('test-room');
+  //const [name, setName] = useState('test-name');
   const [token, setToken] = useState("");
+  const [userChoices, setUserChoices] = useState(null);
 
-  
-  useEffect(() => {
+  const handlePreJoinSubmit = async (values) => {
+    const response = await fetch(`/api/get-participant-token?room=${values.room}&username=${values.username}`);
+    const data = await response.json();
+    setToken(data.token);
+    setUserChoices(values);
+  };
+
+  /*useEffect(() => {
     (async () => {
       try {
         const resp = await fetch(
@@ -37,10 +44,16 @@ export default function Page() {
   if (token === "") {
     return <div>Getting token...</div>;
   }
-
+*/
   
 
   return (
+    <>
+    {!userChoices ? (
+      <PreJoin userLabel="NAME"
+      defaults={{username:"username"}} 
+      onSubmit={handlePreJoinSubmit}/>
+    ) : (
     <LiveKitRoom
       video={true}
       audio={true}
@@ -59,6 +72,8 @@ export default function Page() {
       share tracks and to leave the room. */}
       <ControlBar />
     </LiveKitRoom>
+    )}
+    </>
   );
 }
 
