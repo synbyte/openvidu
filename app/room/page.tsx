@@ -7,6 +7,7 @@ import {
   ParticipantTile,
   RoomAudioRenderer,
   useTracks,
+  PreJoin
 } from "@livekit/components-react";
 import "@livekit/components-styles";
 import { Track } from "livekit-client";
@@ -14,10 +15,11 @@ import { useEffect, useState } from "react";
 
 export default function Page() {
   // TODO: get user input for room and name
-  const room = "quickstart-room";
-  const name = "quickstart-user";
+  const [room, setRoom] = useState('test-room');
+  const [name, setName] = useState('test-name');
   const [token, setToken] = useState("");
 
+  
   useEffect(() => {
     (async () => {
       try {
@@ -36,6 +38,8 @@ export default function Page() {
     return <div>Getting token...</div>;
   }
 
+  
+
   return (
     <LiveKitRoom
       video={true}
@@ -46,6 +50,7 @@ export default function Page() {
       data-lk-theme="default"
       style={{ height: '100dvh' }}
     >
+       
       {/* Your custom component with basic video conferencing functionality. */}
       <MyVideoConference />
       {/* The RoomAudioRenderer takes care of room-wide audio for you. */}
