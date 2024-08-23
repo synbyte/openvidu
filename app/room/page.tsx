@@ -19,9 +19,10 @@ export default function Page() {
   //const [name, setName] = useState('test-name');
   const [token, setToken] = useState("");
   const [userChoices, setUserChoices] = useState(null);
+  const iD = Math.floor(Math.random() * 10)
 
   const handlePreJoinSubmit = async (values: any) => {
-    const response = await fetch(`/api/get-participant-token?room=one&username=${values.username}`);
+    const response = await fetch(`/api/get-participant-token?room=one&username=${values.username+'_'+iD}`);
     const data = await response.json();
     setToken(data.token);
     setUserChoices(values);
@@ -50,8 +51,8 @@ export default function Page() {
   return (
     <>
     {!userChoices ? (
-      <PreJoin userLabel="NAME"
-      defaults={{username:"username"}} 
+      <PreJoin userLabel="Enter username"
+      defaults={{username:''}} 
       onSubmit={handlePreJoinSubmit}/>
     ) : (
     <LiveKitRoom

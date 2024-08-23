@@ -26,6 +26,10 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+.text-shadow {
+  text-shadow: cyan 0 2px 2px;
+}
+
 input {
   color:black;
 }
