@@ -20,7 +20,7 @@ export default function Page() {
   const [token, setToken] = useState("");
   const [userChoices, setUserChoices] = useState(null);
 
-  const handlePreJoinSubmit = async (values) => {
+  const handlePreJoinSubmit = async (values: any) => {
     const response = await fetch(`/api/get-participant-token?room=one&username=${values.username}`);
     const data = await response.json();
     setToken(data.token);
