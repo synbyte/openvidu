@@ -21,7 +21,7 @@ export default function Page() {
   const [userChoices, setUserChoices] = useState(null);
 
   const handlePreJoinSubmit = async (values) => {
-    const response = await fetch(`/api/get-participant-token?room=${values.room}&username=${values.username}`);
+    const response = await fetch(`/api/get-participant-token?room=one&username=${values.username}`);
     const data = await response.json();
     setToken(data.token);
     setUserChoices(values);
